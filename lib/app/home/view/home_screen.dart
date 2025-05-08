@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon/app/home/controller/home_page_controller.dart';
 import 'package:pokemon/app/home/model/home_page_data.dart';
+import 'package:pokemon/app/home/view/pokemon_list_tile.dart';
 
 final homePageControllerProvider = StateNotifierProvider((ref) {
   return HomePageController(HomePageData.initial());
@@ -17,7 +18,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final _homePageController = ref.watch(homePageControllerProvider.notifier);
+    // final _homePageController = ref.watch(homePageControllerProvider.notifier);
     final _homePageData = ref.watch(homePageControllerProvider);
 
     return Scaffold(body: _buildUi(context, _homePageData));
@@ -52,8 +53,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: ListView.builder(
               itemCount: _homePageData.data?.results?.length ?? 0,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(_homePageData.data!.results![index].name!),
+                return PokemonListTile(
+                  pokemonUrl: _homePageData.data?.results?[index].url ?? "",
                 ); // Replace with actual data
               },
             ),
