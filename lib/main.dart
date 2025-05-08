@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pokemon/home_screen.dart';
+import 'package:pokemon/app/home/view/home_screen.dart';
+import 'package:pokemon/data/api_services.dart/http_services.dart';
+import 'package:get_it/get_it.dart';
 
-void main() {
+void main() async {
+  await setUpServices();
   runApp(ProviderScope(child: MyApp()));
+}
+
+Future setUpServices() async {
+  GetIt.instance.registerSingleton<HttpServices>(HttpServices());
 }
 
 class MyApp extends StatelessWidget {
